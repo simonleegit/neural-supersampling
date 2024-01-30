@@ -2,7 +2,7 @@ import sys
 import os
 from enum import Enum, auto
 import bpy
-
+sys.path.append('..') 
 from config import source_resolution, target_resolution
 
 
@@ -41,7 +41,7 @@ def render(output_directory_path: str, file_prefix: str):
                 scene.cycles.samples = 256
                 preferences.addons["cycles"].preferences.compute_device_type = "CUDA"
                 scene.cycles.device = "GPU"
-                for devices in bpy.context.preferences.addons["cycles"].preferences.get_devices():
+                for devices in preferences.addons["cycles"].preferences.devices:
                     for device in devices:
                         device.use = device.type != "CPU"
             else:
@@ -50,8 +50,8 @@ def render(output_directory_path: str, file_prefix: str):
             scene.render.resolution_x = render_resolution[0]
             scene.render.resolution_y = render_resolution[1]
             scene.render.resolution_percentage = 100
-            scene.render.tile_x = 480
-            scene.render.tile_y = 270
+            # scene.render.tile_x = 480
+            # scene.render.tile_y = 270
 
             scene.render.image_settings.file_format = "OPEN_EXR_MULTILAYER"
             scene.render.image_settings.use_preview = False

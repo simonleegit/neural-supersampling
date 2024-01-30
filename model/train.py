@@ -87,20 +87,17 @@ def main(args):
     os.makedirs(tensorboard_root, exist_ok=True)
     logger = TensorBoardLogger(save_dir=tensorboard_root)
     checkpoint_callback = ModelCheckpoint(dirpath=args.checkpoint_dir, every_n_epochs=1)
-    trainer = pl.Trainer.from_argparse_args(
-        args,
+    trainer = pl.Trainer(
         accelerator="auto",
         max_epochs=n_epochs,
         logger=logger,
         precision=16 if enable_amp else 32,
-        callbacks=[checkpoint_callback],
-    )
+        callbacks=[checkpoint_callback])
     trainer.fit(neural_supersampling, trainloader, valloader)
 
 
 if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument("--checkpoint_dir", type=str, default=os.getcwd(), help="where to store checkpoints")
-    parser = pl.Trainer.add_argparse_args(parser)
     args = parser.parse_args()
     main(args)

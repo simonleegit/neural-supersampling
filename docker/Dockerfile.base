@@ -1,0 +1,4 @@
+FROM nvcr.io/nvidia/pytorch:23.12-py3
+RUN apt-get update && apt-get install -y blender && \
+    yes | pip install av kornia pytorch_lightning bpy
+WORKDIR /workspace

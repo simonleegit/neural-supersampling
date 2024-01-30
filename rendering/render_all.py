@@ -1,5 +1,5 @@
 import os
-
+sys.path.append('..') 
 from config import blender_executable
 
 
