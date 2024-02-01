@@ -11,14 +11,14 @@ ID=$(docker run \
     --ulimit stack=67108864 \
     -p 8888:8888 \
     -p 6006:6006 \
-	-e XAUTHORITY=$XAUTH \
+    -e XAUTHORITY=$XAUTH \
     -e BLENDER_PATH=$BLENDER_PATH \
     -e DATA_PATH=$DATA_PATH \
     -e TENSORBOARD_PATH=$TENSORBOARD_PATH \
     -e CHECKPOINT_PATH=$CHECKPOINT_PATH \
     -e VIDEO_OUTPUT=$VIDEO_OUTPUT \
-    -v $PWD:$DOCKER_DIR \
-    -w $DOCKER_DIR \
+    -v $PWD:$DOCKER_PATH \
+    -w $DOCKER_PATH \
     $DOCKER_IMG)
 
 docker exec -it ${ID} bash
