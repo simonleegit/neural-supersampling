@@ -1,0 +1,1 @@
+python -m model.evaluate --checkpoint_dir=$CHECKPOINT_PATH

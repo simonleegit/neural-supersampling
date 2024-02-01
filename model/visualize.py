@@ -32,7 +32,7 @@ from utils import torch_to_numpy
 def main(args):
     pl.seed_everything(42)
     checkpoint_path = sorted(glob.glob(os.path.join(args.checkpoint_dir, "*.ckpt")))[-1]  # load latest checkpoint
-    neural_supersampling = NeuralSupersampling().load_from_checkpoint(checkpoint_path)
+    neural_supersampling = NeuralSupersampling.load_from_checkpoint(checkpoint_path)
     neural_supersampling.to(device)
     neural_supersampling.eval()
 
@@ -88,6 +88,5 @@ if __name__ == "__main__":
     parser.add_argument("--checkpoint_dir", type=str, default=os.getcwd(), help="where to load checkpoints from")
     parser.add_argument("--output_path", type=str, default="visualization.mp4", help="where to render output visualization to")
     parser.add_argument("--length", type=float, default=10., help="length of visualization in seconds")
-    parser = pl.Trainer.add_argparse_args(parser)
     args = parser.parse_args()
     main(args)

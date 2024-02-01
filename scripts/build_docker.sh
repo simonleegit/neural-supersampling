@@ -1,3 +1,5 @@
 #!/bin/bash
 
-docker build -t simon/neural_supersampling:dev . -f docker/Dockerfile.base
+source $PWD/scripts/set_env.sh
+
+docker build -t $DOCKER_IMG . -f docker/Dockerfile.base
